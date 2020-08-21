@@ -1,0 +1,83 @@
+<template>
+  <div id="app">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+      <a class="navbar-brand" href="#">TODOS</a>
+      <button
+        class="navbar-toggler"
+        type="button"
+        data-toggle="collapse"
+        data-target="#navbarColor01"
+        aria-controls="navbarColor01"
+        aria-expanded="false"
+        aria-label="Toggle navigation"
+      >
+        <span class="navbar-toggler-icon"></span>
+      </button>
+    </nav>
+    <main class="container">
+      <form @submit.prevent="insertTodo()" class="mt-3">
+        <div class="form-group">
+          <label for="todo">Enter a new todo</label>
+          <input
+            v-model="currentTodo"
+            type="text"
+            class="form-control"
+            placeholder="Walk the dog..."
+          />
+        </div>
+        <button type="submit" class="btn btn-primary">Submit</button>
+      </form>
+      <ul v-for="(todo, index) in todos" v-bind:key="todo" class="list-group mt-3">
+        <li class="list-group-item text-center todo-title">
+          <span :class="{
+            isDone:todo.done
+          }">{{todo.title}}</span>
+        </li>
+        <div class="btn-group btn-group-toggle" data-toggle="buttons">
+          <label class="btn btn-primary">
+            <input @click="markDone(todo)" type="checkbox" /> Done
+          </label>
+          <label class="btn btn-primary">
+            <input @click="remove(index)" type="checkbox" /> Remove
+          </label>
+        </div>
+      </ul>
+    </main>
+  </div>
+</template>
+
+<script>
+export default {
+  name: "app",
+  data() {
+    return {
+      currentTodo: "",
+      todos: [],
+    };
+  },
+  methods: {
+    insertTodo() {
+      this.todos.push({
+        title: this.currentTodo,
+        done: false,
+      });
+      this.currentTodo = "";
+    },
+    markDone(todo) {
+      todo.done = true;
+    },
+    remove(index) {
+      this.todos.splice(index, 1);
+    },
+  },
+};
+</script>
+
+<style>
+.todo-title {
+  font-size: 1.5em;
+}
+.isDone {
+  text-decoration: line-through;
+}
+</style>
