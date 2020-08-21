@@ -23,7 +23,7 @@
           }">{{todo.title}}</span>
         </li>
         <div class="btn-group btn-group-toggle" data-toggle="buttons">
-          <label class="btn btn-primary">
+          <label v-if="!todo.done" class="btn btn-primary">
             <input @click="markDone(todo)" type="checkbox" /> Done
           </label>
           <label class="btn btn-primary">
