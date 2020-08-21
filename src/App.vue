@@ -1,18 +1,7 @@
 <template>
   <div id="app">
     <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
-      <a class="navbar-brand" href="#">TODOS</a>
-      <button
-        class="navbar-toggler"
-        type="button"
-        data-toggle="collapse"
-        data-target="#navbarColor01"
-        aria-controls="navbarColor01"
-        aria-expanded="false"
-        aria-label="Toggle navigation"
-      >
-        <span class="navbar-toggler-icon"></span>
-      </button>
+      <a class="navbar-brand" href="/">TODOS</a>
     </nav>
     <main class="container">
       <form @submit.prevent="insertTodo()" class="mt-3">
@@ -27,7 +16,7 @@
         </div>
         <button type="submit" class="btn btn-primary">Submit</button>
       </form>
-      <ul v-for="(todo, index) in todos" v-bind:key="todo" class="list-group mt-3">
+      <ul v-for="(todo, index) in todos" v-bind:key="todo.title" class="list-group mt-3">
         <li class="list-group-item text-center todo-title">
           <span :class="{
             isDone:todo.done
